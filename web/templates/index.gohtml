@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<style>
+    body {background-image: url("https://i.pinimg.com/originals/a0/3a/87/a03a875b7cc2adbc6935ed4faeb5ead7.jpg");
+        height: 100%;
+        color: yellow;
+        background-size: cover;}
+</style>
+
+
+<h1>{{.Title}}</h1>
+
+<form action="/burgers/save" method="POST">
+    <input type="hidden" name="action" value="save">
+    <input type="text" name="name" required>
+    <input type="number" name="price" required>
+    <button class="btn btn-outline-success">Добавить</button>
+</form>
+
+<ul>
+
+    {{range $index, $val := .Burgers}}
+    <li>
+         {{$val.Name}} - {{$val.Price}}р
+        <form action="/burgers/remove" method="POST">
+            <input type="hidden" name="action" value="remove">
+            <input type="hidden" name="id" value="{{$val.Id}}">
+            <button class="btn btn-outline-danger">Удалить</button>
+        </form>
+    </li>
+    {{end}}
+</ul>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
